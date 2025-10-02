@@ -1,10 +1,9 @@
 {
-  // Example alternate format some extensions use:
-  "mcpServers": {
-   "ecommerce-db-server": {
-     "command": "${workspaceFolder}/.venv/bin/python3",
-     "args": ["${workspaceFolder}/main.py"],
-     "description": "A set of tools that you can use to look up customer, order, and product information in a transactional database"
-   }
+  "chat.mcp.serverSampling": {
+    "mpc-python/.vscode/mcp.json: my-mcp-server-ccf1dbd6": {
+      "allowedModels": [
+        "copilot/gpt-5-mini"
+      ]
+    }
   }
 }
