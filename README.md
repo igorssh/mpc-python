@@ -1,4 +1,4 @@
-# mpc-python (local test harness)
+# mcp-python (local test harness)
 
 This repository contains a simple MCP server implementation for testing.
 
