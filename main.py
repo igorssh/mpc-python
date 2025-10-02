@@ -73,5 +73,37 @@ async def get_orders_by_customer_id(
         if order.get("customer_id") == customer_id
     }
 
+
+# --- inventory / order tools for MCP ---
+from inventory import get_stock, reserve_stock, fulfill_order_by_id
+from transactional_db import ORDERS_TABLE, PRODUCTS_TABLE
+
+
+@mcp.tool()
+async def reserve_item(sku: str, quantity: int = 1) -> str:
+    """Reserve `quantity` units of a product SKU."""
+    if quantity <= 0:
+        return "Quantity must be >= 1"
+    # ensure sku exists
+    if sku not in PRODUCTS_TABLE:
+        return f"SKU {sku} not found"
+    ok = reserve_stock(sku, quantity)
+    if ok:
+        return f"Reserved {quantity} x {PRODUCTS_TABLE[sku]['name']} (SKU: {sku}). Remaining stock: {PRODUCTS_TABLE[sku]['stock']}"
+    return f"Insufficient stock for SKU {sku}. Current stock: {get_stock(sku)}"
+
+
+@mcp.tool()
+async def fulfill_order(order_id: str) -> str:
+    """Attempt to reserve each item in the order by order_id."""
+    order = ORDERS_TABLE.get(order_id)
+    if not order:
+        return f"No order with ID {order_id}"
+    results = fulfill_order_by_id(order)
+    failed = [sku for sku, ok in results.items() if not ok]
+    if failed:
+        return f"Could not reserve items: {', '.join(failed)}. Partial results: {results}"
+    return f"Order {order_id} reserved successfully. Items: {', '.join(results.keys())}"
+
 if __name__ == "__main__":
     mcp.run(transport="stdio")
