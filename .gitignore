@@ -7,22 +7,22 @@
 out
 gen
 
-+ # Python
-+ __pycache__/
-+ *.py[cod]
-+ *.so
-+ *.egg
-+ *.egg-info/
-+ dist/
-+ build/
-+ .eggs/
-+ pip-wheel-metadata/
-+ *.pyo
-+ *.pyd
-+ .pytest_cache/
-+ .venv/
-+ env/
-+ venv/
-+ ENV/
-+ env.bak/
-+ venv.bak/
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
