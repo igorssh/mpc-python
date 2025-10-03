@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: python:3.11
+  script:
+    - python -m venv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  artifacts:
+    paths:
+      - venv/
