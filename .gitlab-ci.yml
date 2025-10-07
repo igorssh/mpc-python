@@ -30,7 +30,7 @@ test:
       - venv/bin/pip install pytest
   script:
       - pwd
-      - ls -lah #./scripts/run_tests.sh
+      - scripts/run_tests.sh
   artifacts:
       when: always
       reports:
