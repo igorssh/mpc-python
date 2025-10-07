@@ -29,7 +29,7 @@ test:
       - venv/bin/pip install -r requirements.txt
       - venv/bin/pip install pytest
   script:
-      - venv/bin/pytest -v
+      - ./scripts/run_tests.sh
   artifacts:
       when: always
       reports:
