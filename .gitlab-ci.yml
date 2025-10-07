@@ -1,5 +1,13 @@
 stages:
   - build
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip/
 
 build:
   stage: build
@@ -11,3 +19,20 @@ build:
   artifacts:
     paths:
       - venv/
+
+test:
+  stage: test
+  image: python:3.11
+  before_script:
+      - python -m venv venv
+      - venv/bin/pip install --upgrade pip
+      - venv/bin/pip install -r requirements.txt
+      - venv/bin/pip install pytest
+  script:
+      - venv/bin/pytest -v
+  artifacts:
+      when: always
+      reports:
+        junit: pytest.xml
+      paths:
+        - pytest.xml
