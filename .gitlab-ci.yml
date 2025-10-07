@@ -29,6 +29,7 @@ test:
       - venv/bin/pip install -r requirements.txt
       - venv/bin/pip install pytest
   script:
+      - pwd
       - ./scripts/run_tests.sh
   artifacts:
       when: always
